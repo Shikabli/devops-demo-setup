@@ -1,12 +1,12 @@
 pipeline {
   agent any
   parameters {
-    string(name: 'build_version', defaultValue: 'V1.0', description: 'Build version to use for Docker image')
+    string(name: 'build_version', defaultValue: 'v1.0', description: 'Build version to use for Docker image')
   }
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/Shikabli/devops-demo-setup.git'
+        git branch: 'main', url: 'https://github.com/shikabli/devops-demo-setup.git'
       }
     }
     stage('Build and Test') {
@@ -44,7 +44,7 @@ pipeline {
     stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "devops-demo-setup"
-            GIT_USER_NAME = "Shikabli"
+            GIT_USER_NAME = "shikabli"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
